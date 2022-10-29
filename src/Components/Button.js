@@ -232,7 +232,6 @@ export default function Button() {
 
     switch (values.pricing.type) {
       default:
-        alert("no");
         break;
       case "fixed": {
         const freParams = {
@@ -525,7 +524,6 @@ export default function Button() {
 
   // abortController
   const abortController = () => {
-    alert();
     const axiosSource = undefined;
     console.log("ok");
     if (axiosSource.current) {
