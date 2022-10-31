@@ -33,7 +33,7 @@ const algorithmContainerPresets: MetadataAlgorithmContainer[] = [
 export default function Button() {
   const [web3, setWeb3] = useState("");
   const chainId = 5;
-  const accountId = "0x493789c3A5215672ecC6F7153f09a0ADC11A053e";
+  let accountId;
   var values = {
     user: {
       stepCurrent: 5,
@@ -53,8 +53,8 @@ export default function Button() {
       },
       transferable: true,
       type: "dataset",
-      name: "news", //set by user
-      author: "ICHIGO", //set by user
+      name: "news2", //set by user
+      author: "ICHIGO2", //set by user
       description: "new Descrtipn", //set by user
       tags: [
         //set by user
@@ -111,7 +111,7 @@ export default function Button() {
         decimals: 18,
       },
       price: 1,
-      type: "fixed",
+      type: "free",
       freeAgreement: false,
       amountDataToken: 1000,
     },
@@ -740,6 +740,10 @@ export default function Button() {
     try {
       const provider = await web3Modal.connect();
       const web = new Web3(provider);
+      var account = await web.eth.getAccounts();
+      accountId = account[0];
+      values.user.accountId = accountId;
+      console.log("aid", accountId);
       setWeb3(web);
       console.log(web);
       PUBLISHVIDEOS();
