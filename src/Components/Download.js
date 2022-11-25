@@ -495,7 +495,7 @@ export default function Download() {
 
     const fixed = new FixedRateExchange(config.fixedRateExchangeAddress, web3);
     console.log(14, fixed);
-
+    // Function that gives error
     const estimatedPrice = await fixed.calcBaseInGivenDatatokensOut(
       accessDetails.addressOrId,
       "1",

@@ -7,6 +7,7 @@ const providerOptions = {
       rpc: {
         137: "https://polygon-rpc.com",
         80001: "https://rpc-mumbai.matic.today",
+        5: "https://rpc.ankr.com/eth_goerli",
       },
     },
   },
