@@ -4,7 +4,7 @@ import Web3Modal from "web3modal";
 import axios from "axios";
 import slugify from "slugify";
 import { Buffer } from "buffer";
-const {
+import {
   ProviderInstance,
   Nft,
   generateDid,
@@ -13,9 +13,10 @@ const {
   ConfigHelper,
   Config,
   ZERO_ADDRESS,
-} = require("@oceanprotocol/lib");
+} from "@oceanprotocol/lib";
+import Download from "./Download";
 
-const algorithmContainerPresets: MetadataAlgorithmContainer[] = [
+const algorithmContainerPresets = [
   {
     image: "node",
     tag: "latest",
@@ -72,7 +73,7 @@ export default function Button() {
           {
             url: "https://opengraph.githubassets.com/22c20ea862d4ab46dbca607dcd3f1698cddc35fa9f0db3554a0d8b8fa5d620eb/oceanprotocol/ocean-faucet",
             contentLength: "48050",
-            contentType: "image/png",
+            contentType: "video/mp4",
             index: 0,
             valid: true,
           },
@@ -110,8 +111,8 @@ export default function Button() {
         name: "Ocean Token",
         decimals: 18,
       },
-      price: 1,
-      type: "free",
+      price: 3,
+      type: "fixed",
       freeAgreement: false,
       amountDataToken: 1000,
     },
@@ -138,8 +139,11 @@ export default function Button() {
     console.log("getFileUrlInfo");
     try {
       console.log(121);
-      const response = await ProviderInstance.checkFileUrl(url, providerUrl);
-      console.log(123);
+      const response = await ProviderInstance.checkFileUrl(
+        "https://opengraph.githubassets.com/22c20ea862d4ab46dbca607dcd3f1698cddc35fa9f0db3554a0d8b8fa5d620eb/oceanprotocol/ocean-faucet",
+        providerUrl
+      );
+      console.log(response);
       return response;
     } catch (error) {
       console.error("fileinfo", error.message);
@@ -169,7 +173,7 @@ export default function Button() {
     var chainId = 5;
     console.log(web3);
     if (!web3 || !chainId) return;
-    const config = getOceanConfig(chainId);
+    const config = getOceanConfig(5);
     console.log(146, config);
     const factory = new NftFactory(config?.nftFactoryAddress, web3);
     console.log("factory", factory);
@@ -598,7 +602,7 @@ export default function Button() {
   async function create(values) {
     try {
       var chainId = 5;
-      const config = getOceanConfig(chainId);
+      const config = getOceanConfig(5);
       console.log("[publish] using config: ", config);
       console.log(556);
       console.log(580);
@@ -645,7 +649,7 @@ export default function Button() {
         );
 
       console.log("[publish] setMetadata result", res);
-
+      console.log(ddo);
       return { did: ddo.id };
     } catch (error) {
       console.error("[publish] publishfun error", error.message);
@@ -743,7 +747,7 @@ export default function Button() {
       var account = await web.eth.getAccounts();
       accountId = account[0];
       values.user.accountId = accountId;
-      console.log("aid", accountId);
+      console.log("aid", values.user.accountId);
       setWeb3(web);
       console.log(web);
       PUBLISHVIDEOS();
@@ -754,6 +758,7 @@ export default function Button() {
   return (
     <div>
       <button onClick={ConnectWallet}>Collect wallet</button>
+      <Download />
     </div>
   );
 }
