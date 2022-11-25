@@ -1,9 +1,7 @@
-import WalletConnectProvider from "@walletconnect/web3-provider";
 import Web3Modal from "web3modal";
 
 const providerOptions = {
   walletconnect: {
-    package: WalletConnectProvider,
     options: {
       infuraId: "418d1d91f132479ebcc600dab6dbbd3f",
       rpc: {
